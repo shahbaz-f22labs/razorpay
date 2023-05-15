@@ -102,18 +102,70 @@ async function sendMessage(message) {
     // );
     // res = await res.json()
     // console.log(res, "res");
-    let res = await fetch(`https://slack.com/api/chat.postMessage?channel=C0543NZGP34&text=${JSON.stringify(message)}`,{
-        method: 'POST',
-          headers: {
-            Authorization: `Bearer xoxp-5152408310273-5133174991334-5251044098007-2d82558169fc2d937da5ce0f39fc5d19`,
-          },
-    })
+    // let res = await fetch(`https://slack.com/api/chat.postMessage?channel=C0543NZGP34&text=${JSON.stringify(message)}`,{
+    //     method: 'POST',
+    //       headers: {
+    //         Authorization: `Bearer xoxp-5152408310273-5133174991334-5251044098007-2d82558169fc2d937da5ce0f39fc5d19`,
+    //       },
+    // })
 
-    let data = await res.json();
-    console.log(data,'data')
+    // let data = await res.json();
+    // console.log(data,'data')
+
+    let config = {
+        method: 'get',
+        maxBodyLength: Infinity,
+        url: 'https://slack.com/api/chat.postMessage?channel=C0543NZGP34&text=2ndMessage',
+        headers: { 
+          'Authorization': 'Bearer xoxp-5152408310273-5133174991334-5259951082822-97569e9f735fc9c7eb8300a88ab69cb6'
+        }
+      };
+      
+      axios.request(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   } catch (error) {
     console.log("error occured", error.message);
   }
+}
+
+async function get ( ){
+    // try {
+    //     let res = await fetch('https://slack.com/api/chat.postMessage?channel=C0543NZGP34&text=2ndMessage',{
+    //         method: 'GET',
+    //         headers: {
+    //             Authorization: 'Bearer xoxp-5152408310273-5133174991334-5259951082822-97569e9f735fc9c7eb8300a88ab69cb6',
+    //             'Content-Type': 'application/json'
+    //           }
+    //     })
+    //     let data = await res.json();
+
+    //     console.log(data,'data')
+    // } catch (error) {
+    //     console.log(error.message);
+    // }
+
+    // let config = {
+    //     method: 'get',
+    //     maxBodyLength: Infinity,
+    //     url: 'https://slack.com/api/chat.postMessage?channel=C0543NZGP34&text=2ndMessage',
+    //     headers: { 
+    //       'Authorization': 'Bearer xoxp-5152408310273-5133174991334-5259951082822-97569e9f735fc9c7eb8300a88ab69cb6'
+    //     }
+    //   };
+      
+    //   axios.request(config)
+    //   .then((response) => {
+    //     console.log(JSON.stringify(response.data));
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+      
 }
 
 app.listen(port, () => {
