@@ -3,10 +3,12 @@ import express from "express";
 import cors from 'cors';
 import dotenv from 'dotenv';
 import axios from 'axios';
+import bodyParser from body-parser;
 dotenv.config();
 
 const app = express();
 app.use(express.json());
+app.use(bodyParser.json());
 
 app.use(cors());
 
@@ -38,11 +40,11 @@ app.post("/razorpay_webhook", async (req, res) => {
     const RAZORPAY_WEBHOOK_SECRET = "razorpay_webhook@123";
     const SLACK_WEBHOOK_URL =
       "https://hooks.slack.com/services/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";
-    //   const paymentId = req.body.payload.payment.entity.id;
-    const paymentId1 = req.body.pId;
+      const paymentId = req.body.payload.payment.entity.id;
+    // const paymentId1 = req.body.pId;
   
     const response = await axios.get(
-      `https://api.razorpay.com/v1/payments/${paymentId1}`,
+      `https://api.razorpay.com/v1/payments/${paymentId}`,
       {
         headers: {
           Authorization:
@@ -50,7 +52,7 @@ app.post("/razorpay_webhook", async (req, res) => {
         },
       }
     );
-    const data = await response.data;
+    const data = await response.data; 
     console.log(data,"data");
   
     // sendMessage({
@@ -67,7 +69,7 @@ app.post("/razorpay_webhook", async (req, res) => {
     res.status(200).send({ success: "Webhook processed" });
   });
 
-  app.post("/orderId", orderGenerator, (req, res) => {
+  app.post("/orderid", orderGenerator, (req, res) => {
     res.send({ orderId: req.orderId });
 });
 
