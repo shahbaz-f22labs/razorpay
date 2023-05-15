@@ -74,7 +74,7 @@ app.post("/razorpay_webhook", async (req, res) => {
 });
 
 async function sendMessage (message){
-    console.log('line no 75')
+    console.log(message)
     try {
         let res = await fetch(
           `https://slack.com/api/chat.postMessage?channel=C0543NZGP34&text=${JSON.stringify(
