@@ -90,7 +90,7 @@ async function sendMessage (message){
         let data = await res.json();
         console.log(data, "data");
       } catch (error) {
-        console.log("error occured");
+        console.log("error occured",error.message);
       }
 }
 
