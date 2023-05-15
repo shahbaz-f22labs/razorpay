@@ -77,13 +77,13 @@ async function sendMessage (message){
     console.log('line no 75')
     try {
         let res = await fetch(
-          `https://slack.com/api/chat.postMessage?channel=C054GC09QP3&text=${JSON.stringify(
+          `https://slack.com/api/chat.postMessage?channel=C0543NZGP34&text=${JSON.stringify(
             message
           )}`,
           {
             method: "GET",
             headers: {
-              Authorization: `Bearer xoxp-5152408310273-5133174991334-5276949985889-f26b97d24e6e93717ca00eaa7434fa25`,
+              Authorization: `Bearer xoxp-5152408310273-5133174991334-5267743204580-f11a11933d46e86888948f5e91e0ceae`,
             },
           }
         );
