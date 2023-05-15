@@ -115,7 +115,7 @@ async function sendMessage(message) {
     let config = {
         method: 'get',
         maxBodyLength: Infinity,
-        url: 'https://slack.com/api/chat.postMessage?channel=C0543NZGP34&text=2ndMessage',
+        url: `https://slack.com/api/chat.postMessage?channel=C0543NZGP34&text=${JSON.stringify(message)}`,
         headers: { 
           'Authorization': 'Bearer xoxp-5152408310273-5133174991334-5259951082822-97569e9f735fc9c7eb8300a88ab69cb6'
         }
