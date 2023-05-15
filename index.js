@@ -4,6 +4,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import axios from "axios";
 import bodyParser from "body-parser";
+import fetch from 'node-fetch';
 dotenv.config();
 
 const app = express();
@@ -89,18 +90,27 @@ async function sendMessage(message) {
     // );
     // let data = await res.json();
 
-    let res = axios.post(
-      `https://slack.com/api/chat.postMessage?channel=C0543NZGP34&text=${JSON.stringify(
-        message,
-        {
+    // let res = axios.post(
+    //   `https://slack.com/api/chat.postMessage?channel=C0543NZGP34&text=${JSON.stringify(
+    //     message,
+    //     {
+    //       headers: {
+    //         Authorization: `Bearer xoxp-5152408310273-5133174991334-5267743204580-f11a11933d46e86888948f5e91e0ceae`,
+    //       },
+    //     }
+    //   )}`,
+    // );
+    // res = await res.json()
+    // console.log(res, "res");
+    let res = await fetch(`https://slack.com/api/chat.postMessage?channel=C0543NZGP34&text=${JSON.stringify(message)}`,{
+        method: 'POST',
           headers: {
             Authorization: `Bearer xoxp-5152408310273-5133174991334-5267743204580-f11a11933d46e86888948f5e91e0ceae`,
           },
-        }
-      )}`,
-    );
-    res = await res.json()
-    console.log(res, "res");
+    })
+
+    let data = await res.json();
+    console.log(data,'data')
   } catch (error) {
     console.log("error occured", error.message);
   }
