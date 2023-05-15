@@ -99,6 +99,7 @@ async function sendMessage(message) {
         }
       )}`,
     );
+    res = await res.json()
     console.log(res, "res");
   } catch (error) {
     console.log("error occured", error.message);
