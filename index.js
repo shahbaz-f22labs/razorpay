@@ -149,24 +149,26 @@ async function get ( ){
     //     console.log(error.message);
     // }
 
-    // let config = {
-    //     method: 'get',
-    //     maxBodyLength: Infinity,
-    //     url: 'https://slack.com/api/chat.postMessage?channel=C0543NZGP34&text=2ndMessage',
-    //     headers: { 
-    //       'Authorization': 'Bearer xoxp-5152408310273-5133174991334-5259951082822-97569e9f735fc9c7eb8300a88ab69cb6'
-    //     }
-    //   };
+    let config = {
+        method: 'get',
+        maxBodyLength: Infinity,
+        url: 'https://slack.com/api/chat.postMessage?channel=C0543NZGP34&text=3rdMessage',
+        headers: { 
+          'Authorization': 'Bearer xoxp-5152408310273-5133174991334-5269367231444-299404d1fe96654f860e707eae0387be'
+        }
+      };
       
-    //   axios.request(config)
-    //   .then((response) => {
-    //     console.log(JSON.stringify(response.data));
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
+      axios.request(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
       
 }
+
+get()
 
 app.listen(port, () => {
   console.log("Server listening on port " + port);
