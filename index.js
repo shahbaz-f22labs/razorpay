@@ -3,7 +3,7 @@ import express from "express";
 import cors from 'cors';
 import dotenv from 'dotenv';
 import axios from 'axios';
-import bodyParser from body-parser;
+import bodyParser from 'body-parser';
 dotenv.config();
 
 const app = express();
