@@ -105,7 +105,7 @@ async function sendMessage(message) {
     let res = await fetch(`https://slack.com/api/chat.postMessage?channel=C0543NZGP34&text=${JSON.stringify(message)}`,{
         method: 'POST',
           headers: {
-            Authorization: `Bearer xoxp-5152408310273-5133174991334-5278165643137-c54785d85842c9b7bc8955ed92cd7579`,
+            Authorization: `Bearer xoxp-5152408310273-5133174991334-5251044098007-2d82558169fc2d937da5ce0f39fc5d19`,
           },
     })
 
