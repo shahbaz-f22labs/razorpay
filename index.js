@@ -39,6 +39,10 @@ export function orderGenerator(req, res, next) {
 
 app.post("/razorpay_webhook", async (req, res) => {
   const RAZORPAY_WEBHOOK_SECRET = "razorpay_webhook@123";
+  let instance = new Razorpay({
+    key_id: "rzp_test_DsSu2HhlgB0IWf",
+    key_secret: "WdvQrMKGjZPa0bVrUDiubLd5",
+  });
   const SLACK_WEBHOOK_URL =
     "https://hooks.slack.com/services/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";
   const paymentId = req.body.payload.payment.entity.id;
