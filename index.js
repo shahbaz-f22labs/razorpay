@@ -78,61 +78,33 @@ app.post("/razorpay_webhook", async (req, res) => {
         }
       });
 
-      let body = JSON.stringify({
-        "workspaceid": workspaceid ,
-        "userId": userId,
-        "amount": amount,
-        "transactionid": transactionid,
-        "name": name
-      });
-      
-      let config = {
-        method: 'post',
-        maxBodyLength: Infinity,
-        url: 'https://database-project.shahbaz.workers.dev/sendpaymentmessage',
-        headers: { 
-          'Content-Type': 'application/json'
-        },
-        data : body
-      };
-      
-      axios.request(config)
-      .then((response) => {
-        console.log(JSON.stringify(response.data));
-      })
-      .catch((error) => {
-        console.log(error);
-      });
   }
-  // else{
-  //   let body = JSON.stringify({
-  //     "workspaceid": workspaceid ,
-  //     "userId": userId,
-  //     "amount": amount,
-  //     "transactionid": transactionid,
-  //     "name": name
-  //   });
-    
-  //   let config = {
-  //     method: 'post',
-  //     maxBodyLength: Infinity,
-  //     url: 'https://database-project.shahbaz.workers.dev/sendpaymentmessage',
-  //     headers: { 
-  //       'Content-Type': 'application/json'
-  //     },
-  //     data : body
-  //   };
-    
-  //   axios.request(config)
-  //   .then((response) => {
-  //     console.log(JSON.stringify(response.data));
-  //   })
-  //   .catch((error) => {
-  //     console.log(error);
-  //   });
-  // }
   
+  let body = JSON.stringify({
+    "workspaceid": workspaceid ,
+    "userId": userId,
+    "amount": amount,
+    "transactionid": transactionid,
+    "name": name
+  });
   
+  let config = {
+    method: 'post',
+    maxBodyLength: Infinity,
+    url: 'https://database-project.shahbaz.workers.dev/sendpaymentmessage',
+    headers: { 
+      'Content-Type': 'application/json'
+    },
+    data : body
+  };
+  
+  axios.request(config)
+  .then((response) => {
+    console.log(JSON.stringify(response.data));
+  })
+  .catch((error) => {
+    console.log(error);
+  });
   // sendMessage({
   //   paymentId: data.id,
   //   amount: data.amount / 100,
