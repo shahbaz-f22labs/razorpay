@@ -59,11 +59,14 @@ app.post("/razorpay_webhook", async (req, res) => {
   );
   const data = await response.data;
   console.log(data, "data");
-  let workspaceid = data.notes.workspaceId;
-  let userId = data.notes.userId;
+
+  const notesPaylod = JSON.parse(data.notes.data)
+
+  let workspaceid = notesPaylod.workspaceId;
+  let userId = notesPaylod.userId;
   let amount = data.amount;
   let transactionid = data.id
-  let name = data.toName
+  let name = notesPaylod.toName
   if(data.status === 'authorized'){
       // Capture a payment
     instance.payments.capture(paymentId, data.amount, function (error, payment) {
