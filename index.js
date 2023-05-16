@@ -64,7 +64,7 @@ app.post("/razorpay_webhook", async (req, res) => {
 
   let workspaceid = notesPaylod.workspaceId;
   let userId = notesPaylod.userId;
-  let amount = data.amount;
+  let amount = data.amount/100;
   let transactionid = data.id
   let name = notesPaylod.toName
   if(data.status === 'authorized'){
