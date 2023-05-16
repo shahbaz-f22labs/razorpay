@@ -63,9 +63,9 @@ app.post("/razorpay_webhook", async (req, res) => {
   //   email: data.email,
   //   transactionId: data.acquirer_data.upi_transaction_id,
   // });
-  sendMessage({
-    data,
-  });
+//   sendMessage({
+//     data,
+//   });
 
   res.status(200).send({ success: "Webhook processed" });
 });
@@ -168,7 +168,7 @@ async function get ( ){
       
 }
 
-get()
+// get()
 
 app.listen(port, () => {
   console.log("Server listening on port " + port);
