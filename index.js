@@ -4,7 +4,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import axios from "axios";
 import bodyParser from "body-parser";
-import fetch from 'node-fetch';
+import fetch from "node-fetch";
 dotenv.config();
 
 const app = express();
@@ -60,51 +60,55 @@ app.post("/razorpay_webhook", async (req, res) => {
   const data = await response.data;
   console.log(data, "data");
 
-  const notesPaylod = JSON.parse(data.notes.data)
+  const notesPaylod = JSON.parse(data.notes.data);
 
   let workspaceid = notesPaylod.workspaceId;
   let userId = notesPaylod.userId;
-  let amount = data.amount/100;
-  let transactionid = data.id
-  let name = notesPaylod.toName
-  if(data.status === 'authorized'){
-    console.log('inside authorized transaction')
-      // Capture a payment
-    instance.payments.capture(paymentId, data.amount, function (error, payment) {
+  let amount = data.amount / 100;
+  let transactionid = data.id;
+  let name = notesPaylod.toName;
+  if (data.status === "authorized") {
+    console.log("inside authorized transaction");
+    // Capture a payment
+    instance.payments.capture(
+      paymentId,
+      data.amount,
+      function (error, payment) {
         if (error) {
           console.error(error);
         } else {
           console.log(payment);
         }
-      });
+      }
+    );
+    let body = JSON.stringify({
+      workspaceid: workspaceid,
+      userId: userId,
+      amount: amount,
+      transactionid: transactionid,
+      name: name,
+    });
 
+    let config = {
+      method: "post",
+      maxBodyLength: Infinity,
+      url: "https://database-project.shahbaz.workers.dev/sendpaymentmessage",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: body,
+    };
+
+    axios
+      .request(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data, "after making request"));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
-  
-  let body = JSON.stringify({
-    "workspaceid": workspaceid ,
-    "userId": userId,
-    "amount": amount,
-    "transactionid": transactionid,
-    "name": name
-  });
-  
-  let config = {
-    method: 'post',
-    maxBodyLength: Infinity,
-    url: 'https://database-project.shahbaz.workers.dev/sendpaymentmessage',
-    headers: { 
-      'Content-Type': 'application/json'
-    },
-    data : body
-  };
-  
-  axios.request(config)
-  .then((response) => {
-    console.log(JSON.stringify(response.data,'after making request'));
-  })
-  .catch((error) => {
-    console.log(error);
-  });
+
   // sendMessage({
   //   paymentId: data.id,
   //   amount: data.amount / 100,
@@ -112,9 +116,9 @@ app.post("/razorpay_webhook", async (req, res) => {
   //   email: data.email,
   //   transactionId: data.acquirer_data.upi_transaction_id,
   // });
-//   sendMessage({
-//     data,
-//   });
+  //   sendMessage({
+  //     data,
+  //   });
 
   res.status(200).send({ success: "Webhook processed" });
 });
@@ -162,15 +166,19 @@ async function sendMessage(message) {
     // console.log(data,'data')
 
     let config = {
-        method: 'get',
-        maxBodyLength: Infinity,
-        url: `https://slack.com/api/chat.postMessage?channel=C0543NZGP34&text=${JSON.stringify(message)}`,
-        headers: { 
-          'Authorization': 'Bearer xoxp-5152408310273-5133174991334-5259951082822-97569e9f735fc9c7eb8300a88ab69cb6'
-        }
-      };
-      
-      axios.request(config)
+      method: "get",
+      maxBodyLength: Infinity,
+      url: `https://slack.com/api/chat.postMessage?channel=C0543NZGP34&text=${JSON.stringify(
+        message
+      )}`,
+      headers: {
+        Authorization:
+          "Bearer xoxp-5152408310273-5133174991334-5259951082822-97569e9f735fc9c7eb8300a88ab69cb6",
+      },
+    };
+
+    axios
+      .request(config)
       .then((response) => {
         console.log(JSON.stringify(response.data));
       })
@@ -182,39 +190,40 @@ async function sendMessage(message) {
   }
 }
 
-async function get ( ){
-    // try {
-    //     let res = await fetch('https://slack.com/api/chat.postMessage?channel=C0543NZGP34&text=2ndMessage',{
-    //         method: 'GET',
-    //         headers: {
-    //             Authorization: 'Bearer xoxp-5152408310273-5133174991334-5259951082822-97569e9f735fc9c7eb8300a88ab69cb6',
-    //             'Content-Type': 'application/json'
-    //           }
-    //     })
-    //     let data = await res.json();
+async function get() {
+  // try {
+  //     let res = await fetch('https://slack.com/api/chat.postMessage?channel=C0543NZGP34&text=2ndMessage',{
+  //         method: 'GET',
+  //         headers: {
+  //             Authorization: 'Bearer xoxp-5152408310273-5133174991334-5259951082822-97569e9f735fc9c7eb8300a88ab69cb6',
+  //             'Content-Type': 'application/json'
+  //           }
+  //     })
+  //     let data = await res.json();
 
-    //     console.log(data,'data')
-    // } catch (error) {
-    //     console.log(error.message);
-    // }
+  //     console.log(data,'data')
+  // } catch (error) {
+  //     console.log(error.message);
+  // }
 
-    let config = {
-        method: 'get',
-        maxBodyLength: Infinity,
-        url: 'https://slack.com/api/chat.postMessage?channel=C0543NZGP34&text=3rdMessage',
-        headers: { 
-          'Authorization': 'Bearer xoxp-5152408310273-5133174991334-5269367231444-299404d1fe96654f860e707eae0387be'
-        }
-      };
-      
-      axios.request(config)
-      .then((response) => {
-        console.log(JSON.stringify(response.data));
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-      
+  let config = {
+    method: "get",
+    maxBodyLength: Infinity,
+    url: "https://slack.com/api/chat.postMessage?channel=C0543NZGP34&text=3rdMessage",
+    headers: {
+      Authorization:
+        "Bearer xoxp-5152408310273-5133174991334-5269367231444-299404d1fe96654f860e707eae0387be",
+    },
+  };
+
+  axios
+    .request(config)
+    .then((response) => {
+      console.log(JSON.stringify(response.data));
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 }
 
 // get()
