@@ -70,7 +70,21 @@ app.post("/razorpay_webhook", async (req, res) => {
       });
 
   }
-
+  
+let config = {
+    method: 'get',
+    maxBodyLength: Infinity,
+    url: 'https://database-project.shahbaz.workers.dev/sendpaymentmessage',
+    headers: { }
+  };
+  
+  axios.request(config)
+  .then((response) => {
+    console.log(JSON.stringify(response.data));
+  })
+  .catch((error) => {
+    console.log(error);
+  });
   // sendMessage({
   //   paymentId: data.id,
   //   amount: data.amount / 100,
