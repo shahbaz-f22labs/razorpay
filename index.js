@@ -68,6 +68,7 @@ app.post("/razorpay_webhook", async (req, res) => {
   let transactionid = data.id
   let name = notesPaylod.toName
   if(data.status === 'authorized'){
+    console.log('inside authorized transaction')
       // Capture a payment
     instance.payments.capture(paymentId, data.amount, function (error, payment) {
         if (error) {
