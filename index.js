@@ -59,6 +59,11 @@ app.post("/razorpay_webhook", async (req, res) => {
   );
   const data = await response.data;
   console.log(data, "data");
+  let workspaceid = data.notes.workspaceId;
+  let userId = data.notes.userId;
+  let amount = data.amount;
+  let transactionid = data.id
+  let name = data.toName
   if(data.status === 'authorized'){
       // Capture a payment
     instance.payments.capture(paymentId, data.amount, function (error, payment) {
@@ -71,11 +76,22 @@ app.post("/razorpay_webhook", async (req, res) => {
 
   }
   
-let config = {
-    method: 'get',
+  let body = JSON.stringify({
+    "workspaceid": workspaceid ,
+    "userId": userId,
+    "amount": amount,
+    "transactionid": transactionid,
+    "name": name
+  });
+  
+  let config = {
+    method: 'post',
     maxBodyLength: Infinity,
     url: 'https://database-project.shahbaz.workers.dev/sendpaymentmessage',
-    headers: { }
+    headers: { 
+      'Content-Type': 'application/json'
+    },
+    data : body
   };
   
   axios.request(config)
