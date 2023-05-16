@@ -53,8 +53,8 @@ app.post("/razorpay_webhook", async (req, res) => {
 //       },
 //     }
 //   );
-  const data = await response.data;
-  console.log(data, "data");
+//   const data = await response.data;
+//   console.log(data, "data");
   // Capture a payment
 instance.payments.capture(paymentId, 50000, function (error, payment) {
     if (error) {
