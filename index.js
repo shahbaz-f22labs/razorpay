@@ -100,7 +100,7 @@ app.post("/razorpay_webhook", async (req, res) => {
   
   axios.request(config)
   .then((response) => {
-    console.log(JSON.stringify(response.data));
+    console.log(JSON.stringify(response.data,'after making request'));
   })
   .catch((error) => {
     console.log(error);
