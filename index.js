@@ -48,25 +48,25 @@ app.post("/razorpay_webhook", async (req, res) => {
   const paymentId = req.body.payload.payment.entity.id;
   // const paymentId1 = req.body.pId;
 
-//   const response = await axios.get(
-//     `https://api.razorpay.com/v1/payments/${paymentId}`,
-//     {
-//       headers: {
-//         Authorization:
-//           "Basic cnpwX3Rlc3RfRHNTdTJIaGxnQjBJV2Y6V2R2UXJNS0dqWlBhMGJWclVEaXViTGQ1",
-//       },
-//     }
-//   );
-//   const data = await response.data;
-//   console.log(data, "data");
-  // Capture a payment
-instance.payments.capture(paymentId, 50000, function (error, payment) {
-    if (error) {
-      console.error(error);
-    } else {
-      console.log(payment);
+  const response = await axios.get(
+    `https://api.razorpay.com/v1/payments/${paymentId}`,
+    {
+      headers: {
+        Authorization:
+          "Basic cnpwX3Rlc3RfRHNTdTJIaGxnQjBJV2Y6V2R2UXJNS0dqWlBhMGJWclVEaXViTGQ1",
+      },
     }
-  });
+  );
+  const data = await response.data;
+  console.log(data, "data");
+  // Capture a payment
+// instance.payments.capture(paymentId, 50000, function (error, payment) {
+//     if (error) {
+//       console.error(error);
+//     } else {
+//       console.log(payment);
+//     }
+//   });
 
   // sendMessage({
   //   paymentId: data.id,
